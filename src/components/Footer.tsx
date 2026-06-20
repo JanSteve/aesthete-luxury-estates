@@ -22,10 +22,10 @@ export default function Footer() {
             Advisory
           </Link>
           <Link
-            href="/vault"
+            href="/#client-application"
             className="text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors duration-300"
           >
-            Client Vault
+            Request Access
           </Link>
           <a
             href="#"

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Lock, ShieldAlert } from 'lucide-react';
+import { Menu, X, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -43,7 +43,7 @@ export default function Navbar() {
               AESTHETE
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation (Visible on desktop/laptop, hidden on mobile) */}
             <div className="hidden md:flex items-center gap-12">
               <Link
                 href="/collection"
@@ -66,44 +66,15 @@ export default function Navbar() {
                 Advisory
               </Link>
               <Link
-                href="/vault"
-                className={`text-label-sm uppercase tracking-[0.2em] champagne-underline transition-colors duration-500 ${
-                  pathname === '/vault'
-                    ? 'text-champagne-gold active'
-                    : 'text-on-surface/60 hover:text-champagne-gold'
-                }`}
+                href="/#client-application"
+                className="text-label-sm uppercase tracking-[0.2em] text-on-surface/60 hover:text-champagne-gold champagne-underline transition-colors duration-500"
               >
-                Client Vault
+                Request Access
               </Link>
             </div>
 
-            {/* Icons & Actions */}
-            <div className="flex items-center gap-6">
-              {/* Lock / Vault Status Icon */}
-              <Link
-                href="/vault"
-                className="text-on-surface hover:text-champagne-gold transition-colors duration-300 relative group"
-                aria-label="Access Vault"
-              >
-                <Lock className="w-5 h-5" />
-                <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-surface-low border border-outline-subtle/20 text-[10px] uppercase tracking-widest text-champagne-gold py-1.5 px-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                  Secure Access
-                </span>
-              </Link>
-
-              {/* Profile Thumbnail */}
-              <Link
-                href="/vault"
-                className="w-10 h-10 rounded-full overflow-hidden border border-outline-subtle/30 hover:border-champagne-gold transition-colors duration-500 hidden sm:block"
-              >
-                <img
-                  alt="Client Profile"
-                  className="w-full h-full object-cover"
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80"
-                />
-              </Link>
-
-              {/* Hamburger Button */}
+            {/* Hamburger Button (Visible ONLY on mobile/tablet, hidden on desktop) */}
+            <div className="md:hidden flex items-center">
               <button
                 onClick={toggleMenu}
                 className="text-on-surface hover:text-champagne-gold transition-colors duration-300 focus:outline-none"
@@ -116,7 +87,7 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Full Screen Sidebar Menu Drawer */}
+      {/* Full Screen Sidebar Menu Drawer (Mobile ONLY) */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -124,7 +95,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[60] flex justify-end"
+            className="fixed inset-0 z-[60] flex justify-end md:hidden"
           >
             {/* Backdrop */}
             <div
@@ -152,7 +123,7 @@ export default function Navbar() {
               {/* Sidebar Header */}
               <div className="text-center mt-12 mb-8">
                 <h2 className="font-serif text-headline-md text-champagne-gold tracking-tight mb-2">
-                  ESTATE VAULT
+                  AESTHETE
                 </h2>
                 <div className="flex items-center justify-center gap-2 text-label-sm uppercase tracking-widest text-on-surface-variant/60">
                   <ShieldAlert className="w-3.5 h-3.5 text-champagne-gold/60" />
@@ -163,11 +134,9 @@ export default function Navbar() {
               {/* Navigation Menu */}
               <nav className="flex flex-col items-center gap-8 my-auto">
                 {[
-                  { label: 'The Vault', path: '/vault' },
-                  { label: 'Private Listings', path: '/collection' },
+                  { label: 'Private Collection', path: '/collection' },
                   { label: 'Advisory Services', path: '/advisory' },
-                  { label: 'Investor Portal', path: '/' },
-                  { label: 'Contact Concierge', path: '/' },
+                  { label: 'Request Access', path: '/#client-application' },
                 ].map((item, index) => (
                   <motion.div
                     key={item.label}
